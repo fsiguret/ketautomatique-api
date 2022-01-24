@@ -47,9 +47,7 @@ server.on("listening", () => {
   const bind = typeof address === "string" ? "pipe " + address : "port " + port;
   console.log("Listening on " + bind);
 });
-// import Binance from "node-binance-api";
-// const binance = new Binance().options({
-//   APIKEY: process.env.TRUE_API_KEY,
-//   APISECRET: process.env.TRUE_SECRET_API_KEY,
-// });
-server.listen(port);
+
+server.listen(port, () => {
+  console.log("server is running");
+});
