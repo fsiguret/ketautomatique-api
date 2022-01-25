@@ -25,14 +25,15 @@ orderController.addOrders = async (req, res) => {
 
   for (const promise of historyOrdersPending) {
     const orders = await promise;
+
     if (orders[0]) {
       orders.forEach((order) => {
         historyOrders.push(order);
       });
     }
   }
-  const currentHistory = await Orders.find({});
 
+  const currentHistory = await Orders.find({});
   if (currentHistory.length === 0) {
     Orders.create(historyOrders)
       .then(() => res.status(201).json({ message: "Orders has been saved" }))
