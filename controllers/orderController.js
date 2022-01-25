@@ -16,7 +16,7 @@ import Binance from "node-binance-api";
 const orderController = {};
 
 /**
- * Get the user trades from binance API, format the response to match with mongoose modeland save in mongoDB
+ * Get the user trades from binance API, format the response to match with mongoose model and save in mongoDB
  * @function addOrders
  * @memberOf module:controllers/orders~orderController
  * @param {Object} req - request body
@@ -29,8 +29,8 @@ orderController.addOrders = async (req, res) => {
 
   //Setup Binance's options
   const binance = new Binance().options({
-    APIKEY: process.env.TRUE_API_KEY,
-    APISECRET: process.env.TRUE_SECRET_API_KEY,
+    APIKEY: process.env.API_KEY,
+    APISECRET: process.env.SECRET_API_KEY,
   });
   const exchangeInfo = await binance.futuresExchangeInfo();
 
@@ -45,13 +45,15 @@ orderController.addOrders = async (req, res) => {
   });
 
   for (const promise of historyOrdersPending) {
-    const orders = await promise;
-
-    if (orders[0]) {
-      orders.forEach((order) => {
-        historyOrders.push(order);
-      });
-    }
+    await promise
+      .then((orders) => {
+        if (orders[0]) {
+          orders.forEach((order) => {
+            historyOrders.push(order);
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   //get all orders in DB. If they have one order. delete the collection and recreate. !!!! NEED TO BE CHANGED

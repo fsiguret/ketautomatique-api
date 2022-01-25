@@ -23,8 +23,8 @@ const userController = {};
  */
 userController.getAccount = async (req, res) => {
   const binance = new Binance().options({
-    APIKEY: process.env.TRUE_API_KEY,
-    APISECRET: process.env.TRUE_SECRET_API_KEY,
+    APIKEY: process.env.API_KEY,
+    APISECRET: process.env.SECRET_API_KEY,
   });
   await binance
     .futuresAccount()
