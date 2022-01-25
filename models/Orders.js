@@ -1,5 +1,24 @@
 import mongoose from "mongoose";
 
+/**
+ * Mongoose model for Order
+ * @class Order
+ * @property {Boolean} buyer
+ * @property {Number} commission
+ * @property {String} commissionAsset
+ * @property {Number} id
+ * @property {Boolean} maker
+ * @property {Number} orderId
+ * @property {Number} price
+ * @property {Number} qty
+ * @property {Number} quoteQty
+ * @property {Number} realizedPnl
+ * @property {String} side
+ * @property {String} positionSide
+ * @property {String} symbol
+ * @property {Number} time
+ * @type {*}
+ */
 const ordersSchema = mongoose.Schema({
   buyer: { type: Boolean, required: true },
   commission: { type: Number, required: true },

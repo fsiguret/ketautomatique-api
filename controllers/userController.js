@@ -1,8 +1,27 @@
+/**
+ * Express controller for user's
+ * @module controllers/users
+ * @requires Binance - node-binance-api
+ */
 import Binance from "node-binance-api";
 
-const orderController = {};
+/**
+ * Express controller
+ * @type {object}
+ * @const
+ * @namespace userController
+ */
+const userController = {};
 
-orderController.getAccount = async (req, res) => {
+/**
+ * Setup binance's option and return the account infos
+ * @function getAccount
+ * @memberOf module:controllers/users~userController
+ * @param {Object} req - request body
+ * @param {Object} res - response body
+ * @return {Promise<void>}
+ */
+userController.getAccount = async (req, res) => {
   const binance = new Binance().options({
     APIKEY: process.env.TRUE_API_KEY,
     APISECRET: process.env.TRUE_SECRET_API_KEY,
@@ -15,4 +34,4 @@ orderController.getAccount = async (req, res) => {
     .catch((err) => res.status(500).json(err));
 };
 
-export default orderController;
+export default userController;
